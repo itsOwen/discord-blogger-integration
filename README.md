@@ -10,7 +10,7 @@ Its a very simple discord bot created in python using blogger api in order to se
 Its a free to use bot. Do what ever you like with it :)
 
 ## Features:
-1. It uses [blogger.com](https://blogger.com) API inorder to disaply data from your site to your users easily.
+1. It uses [blogger.com](https://blogger.com) API inorder to display data from your site to your users easily.
 2. You just have to search the command ++meneed (topic you are searching) without brackets and it will work.
 
 ## Note (Installation):
