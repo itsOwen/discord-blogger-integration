@@ -1,6 +1,6 @@
 # Discord Blogger Integration Using Blogger API! <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="30px">
 
-<img src="https://github.com/itsOwen/discord-blogger-integration/blob/master/logo.png">
+<img src="https://github.com/itsOwen/discord-blogger-integration/blob/master/intro_logo.png">
 
 Its a very simple discord bot created in python using blogger api in order to search your website using your discord server. Its pretty useful for people who are on blogger platform as there are not much you can do with blogegr because of the restrictions.
 
