@@ -10,22 +10,22 @@ from googleapiclient.discovery import build
 
 client = commands.Bot(command_prefix="++")
 
-Key = "your_api_key" # Replace with your api key
-BlogID = "your_blog_id" #Replace 
+Key = "#"
+BlogID = "#"
 
 blog = build("blogger", "v3", developerKey=Key)
 
 @client.event
 async def on_ready():
-    print("Bot has started running")
+    print("Bot is has started running")
     await client.change_presence(activity=discord.Game(name="cmd: ++search"))
 
 @client.command()
 async def search(ctx, arg):
     search_term = str(arg).replace(" ", "%")
-    base_url = "https://www.googleapis.com/blogger/v3/blogs/your_id/posts/search" # Replace your_id
+    base_url = "https://www.googleapis.com/blogger/v3/blogs/#/posts/search"
     complete_url = base_url + "?q=" + search_term + \
-        "&key=your_key" # Replace your_key
+        "&key=#"
     response = requests.get(complete_url)
     result = response.json()
 
@@ -49,30 +49,22 @@ client.recentPosts = None
 
 @tasks.loop(seconds=5.0)
 async def fetchUpdates():
-    posts = blog.posts()
-    posts = posts.list(blogId=BlogID).execute()         
+    posts = blog.posts().list(blogId=BlogID).execute()
+    postsList = posts["items"]
+    postTime = postsList[0]["published"]
     if not client.recentPosts:
-        client.recentPosts = posts
-        print("no recents")
-    elif client.recentPosts != posts:
-        set1 = len(posts["items"])
-        set2 = len(client.recentPosts["items"])
-        value = set1 - set2
-        if value < 0:
-            client.recentPosts = posts
-            value = 0
-        elif value > 0:
-            titleValue = str(posts["items"][0]["title"])
-            urlValue = str(posts["items"][0]["url"])
-            channel = client.get_channel(announcement_channel_id) # Replace
-            embed = discord.Embed(title="New posts to the blog!", description=f"[{titleValue}]({urlValue})")
-            embed.set_author(name="Gaming Forecast")
-            embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
-            await channel.send(embed=embed)
-            value = 0
-            client.recentPosts = posts
+        client.recentPosts = postTime
+    elif client.recentPosts != postTime:
+        titleValue = str(posts["items"][0]["title"])
+        urlValue = str(posts["items"][0]["url"])
+        channel = client.get_channel(#)
+        embed = discord.Embed(title="New posts to the blog!", description=f"[{titleValue}]({urlValue})")
+        embed.set_author(name="Gaming Forecast")
+        embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
+        await channel.send(embed=embed)
+        client.recentPosts = postTime
 
 fetchUpdates.start()
 
 
-client.run("your_token") # Replace
+client.run("#")
