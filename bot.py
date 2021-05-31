@@ -7,18 +7,22 @@ import random
 import os
 from datetime import datetime
 from googleapiclient.discovery import build
+import time
 
 client = commands.Bot(command_prefix="++")
 
 Key = "#"  # Replace with your API key
 BlogID = "#"  # Replace your BlogId here.
 
+
+Games = ['csgo', 'pubg', 'rust', 'valorant']
+
 blog = build("blogger", "v3", developerKey=Key)
 
 
 @client.event
 async def on_ready():
-    print("Bot is has started running")
+    print("Bot has started running")
     await client.change_presence(activity=discord.Game(name="cmd: ++search"))
 
 
@@ -52,6 +56,9 @@ async def search(ctx, arg):
         await ctx.send("There is something wrong with the response.")
 
 client.recentPosts = None
+client.recentPostsTime = None
+client.recentPostsEdit = None
+
 
 
 @tasks.loop(seconds=5.0)
@@ -60,18 +67,33 @@ async def fetchUpdates():
     postsList = posts["items"]
     postTime = postsList[0]["published"]
     if not client.recentPosts:
-        client.recentPosts = postTime
-    elif client.recentPosts != postTime:
+        client.recentPostsTime = postTime
+        client.recentPosts = postsList
+    elif client.recentPostsTime != postTime:
         titleValue = str(posts["items"][0]["title"])
         urlValue = str(posts["items"][0]["url"])
+
+        channel = client.get_channel(824401596695183400)  # Add channel ID
+        embed = discord.Embed(title="New posts to the blog!",
+                            description=f"[{titleValue}]({urlValue})")
+
         channel = client.get_channel(your_Channel_id_here)  # Add channel ID
         embed = discord.Embed(title="New posts to the blog!",
                               description=f"[{titleValue}]({urlValue})")
+
         embed.set_author(name="Your Website Name")
         embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
+        for i in Games:
+            if i in postsList[0]["title"].lower():
+                await channel.send("@" + i)
         await channel.send(embed=embed)
-        client.recentPosts = postTime
+        client.recentPostsTime = postTime
+        client.recentPosts = postsList
 
 fetchUpdates.start()
 
+
 client.run("#")  # Your discord bot token here
+
+client.run("#")  # Your discord bot token here
+
