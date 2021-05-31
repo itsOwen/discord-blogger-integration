@@ -16,6 +16,7 @@ Its a free to use bot. Do what ever you like with it :)
 ## Features:
 1. It uses [blogger.com](https://blogger.com) API inorder to display data from your site to your users easily.
 2. You just have to search the command ++search (topic you are searching) without brackets and it will work.
+3. Notify users when there is something new added to the blogspot site or if something is updated.
 
 ## Note (Installation):
 1. Download this repository.
@@ -25,6 +26,6 @@ Its a free to use bot. Do what ever you like with it :)
 5. Add your [API key](https://developers.google.com/blogger/docs/3.0/using) and [Blogger ID](https://subinsb.com/how-to-find-blogger-blog-id/).
 
 ## Upcoming Features:
-I will add whenever you update any article on your website it will notify the users.
+If you want us to add some features gives us ideas by creating an issue or checking our Todolist.
 
 ## Have a nice day :)
