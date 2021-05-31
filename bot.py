@@ -15,7 +15,6 @@ BlogID = "#"  # Replace your BlogId here.
 
 blog = build("blogger", "v3", developerKey=Key)
 
-blog = build("blogger", "v3", developerKey=Key)
 
 @client.event
 async def on_ready():
@@ -75,4 +74,4 @@ async def fetchUpdates():
 
 fetchUpdates.start()
 
-client.run("#") # Your discord bot token here
+client.run("#")  # Your discord bot token here
