@@ -14,7 +14,7 @@ client = commands.Bot(command_prefix="++")
 Key = "#"  # Replace with your API key
 BlogID = "#"  # Replace your BlogId here.
 
-Roles = ['csgo', 'pubg', 'rust', 'valorant']  # add your server roles here
+Roles = ["CSGO", "Garry's Mod", "GTA 5", "Valorant", "Apex", "League of Legends", "Fortnite", "SoT", "Among Us", "Rust", "PUBG", "Rainbow Six", "Phasmophobia", "Overwatch", "Warzone", "Krunker.io"] # add your server roles here
 
 blog = build("blogger", "v3", developerKey=Key)
 
@@ -40,7 +40,7 @@ async def search(ctx, arg):
 
     embed = discord.Embed(title="List of Search results",
                           description="Checked on " + f"{current_time}\n", color=0x349bfc)
-    embed.set_author(name="Your Website Here")
+    embed.set_author(name="Gaming Forecast")
     embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
     try:
         for count, value in enumerate(result["items"]):
@@ -72,19 +72,21 @@ async def fetchUpdates():
         urlValue = str(posts["items"][0]["url"])
 
         channel = client.get_channel(channel_id)  # Add channel ID
-        embed = discord.Embed(title="New posts to the blog!",
+        embed = discord.Embed(title="New cheetos available on the blog!",
                               description=f"[{titleValue}]({urlValue})")
 
         channel = client.get_channel(channel_id)  # Add channel ID
-        embed = discord.Embed(title="New posts to the blog!",
+        embed = discord.Embed(title="New cheetos available on the blog!",
                               description=f"[{titleValue}]({urlValue})")
 
-        embed.set_author(name="Your Website Name")
+        embed.set_author(name="Gaming Forecast")
         embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
         for i in Roles:
-            if i in postsList[0]["title"].lower():
+            if i.lower() in postsList[0]["title"].lower():
                 await channel.send("@" + i)
-        await channel.send(embed=embed)
+                await channel.send(embed=embed)
+                break
+
         client.recentPostsTime = postTime
         client.recentPosts = postsList
 
