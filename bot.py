@@ -3,20 +3,20 @@ import json
 import discord
 from discord.ext import commands
 from discord.ext import tasks
-import random
-import os
 from datetime import datetime
 from googleapiclient.discovery import build
-import time
 
 client = commands.Bot(command_prefix="++")
 
-Key = "#"  # Replace with your API key
-BlogID = "#"  # Replace your BlogId here.
+Key = "#"  # Replace with your API key.
 
-Roles = ["CSGO", "Garry's Mod", "GTA 5", "Valorant", "Apex", "League of Legends", "Fortnite", "SoT", "Among Us", "Rust", "PUBG", "Rainbow Six", "Phasmophobia", "Overwatch", "Warzone", "Krunker.io"] # add your server roles here
+BlogID = "#"  # Replace with your BlogId here.
+
+Roles = ["CSGO", "Garry's Mod", "GTA 5"]  # Add your server roles here.
 
 blog = build("blogger", "v3", developerKey=Key)
+
+Token = '#' # Replace with Discord Bot Token.
 
 
 @client.event
@@ -40,8 +40,8 @@ async def search(ctx, arg):
 
     embed = discord.Embed(title="List of Search results",
                           description="Checked on " + f"{current_time}\n", color=0x349bfc)
-    embed.set_author(name="Website Name")
-    embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
+    embed.set_author(name="Your Website Name")
+    embed.set_thumbnail(url="https://www.yourwebsite.com/favicon.ico")
     try:
         for count, value in enumerate(result["items"]):
             title = result["items"][count]["title"]
@@ -79,12 +79,13 @@ async def fetchUpdates():
         embed = discord.Embed(title="New posts available on the blog!",
                               description=f"[{titleValue}]({urlValue})")
 
-        embed.set_author(name="Website Name")
-        embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
+        embed.set_author(name="Your Website")
+        embed.set_thumbnail(url="https://www.yourwebsite.com/favicon.ico")
         for i in Roles:
             if i.lower() in postsList[0]["title"].lower():
-                await channel.send("@" + i)
-                await channel.send(embed=embed)
+                guild = client.guilds[0]
+                await channel.send(discord.utils.get(guild.roles, name=i).mention, delete_after=86400.0)
+                await channel.send(embed=embed, delete_after=86400.0)
                 break
 
         client.recentPostsTime = postTime
@@ -92,5 +93,4 @@ async def fetchUpdates():
 
 fetchUpdates.start()
 
-# Your discord bot token here
-client.run("#")
+client.run(Token, bot=True)
