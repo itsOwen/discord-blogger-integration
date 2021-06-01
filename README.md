@@ -28,4 +28,10 @@ Its a free to use bot. Do what ever you like with it :)
 ## Upcoming Features:
 If you want us to add some features gives us ideas by creating an issue or checking our Todolist.
 
+### Keywords
+1. How to send message from discord bot when something is update on website.
+2. Send notification to users when something is updated on site blogger (blogspot).
+3. Discord Blogger Integration.
+4. Blogger API use with discord.
+
 ## Have a nice day :)
