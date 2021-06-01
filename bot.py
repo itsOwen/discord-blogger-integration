@@ -40,7 +40,7 @@ async def search(ctx, arg):
 
     embed = discord.Embed(title="List of Search results",
                           description="Checked on " + f"{current_time}\n", color=0x349bfc)
-    embed.set_author(name="Gaming Forecast")
+    embed.set_author(name="Website Name")
     embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
     try:
         for count, value in enumerate(result["items"]):
@@ -72,14 +72,14 @@ async def fetchUpdates():
         urlValue = str(posts["items"][0]["url"])
 
         channel = client.get_channel(channel_id)  # Add channel ID
-        embed = discord.Embed(title="New cheetos available on the blog!",
+        embed = discord.Embed(title="New posts available on the blog!",
                               description=f"[{titleValue}]({urlValue})")
 
         channel = client.get_channel(channel_id)  # Add channel ID
-        embed = discord.Embed(title="New cheetos available on the blog!",
+        embed = discord.Embed(title="New posts available on the blog!",
                               description=f"[{titleValue}]({urlValue})")
 
-        embed.set_author(name="Gaming Forecast")
+        embed.set_author(name="Website Name")
         embed.set_thumbnail(url="https://www.gamingforecast.com/favicon.ico")
         for i in Roles:
             if i.lower() in postsList[0]["title"].lower():
